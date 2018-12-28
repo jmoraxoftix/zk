@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+F86-ZK-4111.zul
+
+		Purpose:
+		
+		Description:
+		
+		History:
+				Tue Dec 25 09:51:49 CST 2018, Created by leon
+
+Copyright (C) 2018 Potix Corporation. All Rights Reserved.
+
+-->
+<zk xmlns:w="client">
+	<script><![CDATA[
+		function showAttr() {
+			setTimeout(function() {
+				$('$bandbox')[0].innerText = $('.z-bandbox-input')[0].outerHTML;
+				$('$combobox')[0].innerText = $('.z-combobox-input')[0].outerHTML;
+				$('$textbox')[0].innerText = $('.z-textbox')[0].outerHTML;
+				$('$datebox')[0].innerText = $('.z-datebox-input')[0].outerHTML;
+				$('$timebox')[0].innerText = $('.z-timebox-input')[0].outerHTML;
+				$('$timepicker')[0].innerText = $('.z-timepicker-input')[0].outerHTML;
+				$('$decimalbox')[0].innerText = $('.z-decimalbox')[0].outerHTML;
+				$('$doublebox')[0].innerText = $('.z-doublebox')[0].outerHTML;
+				$('$doublespinner')[0].innerText = $('.z-doublespinner-input')[0].outerHTML;
+				$('$intbox')[0].innerText = $('.z-intbox')[0].outerHTML;
+				$('$longbox')[0].innerText = $('.z-longbox')[0].outerHTML;
+				$('$spinner')[0].innerText = $('.z-spinner-input')[0].outerHTML;
+			}, 1000);
+		}
+		showAttr();
+	]]></script>
+	<div viewModel="@id('vm') @init('org.zkoss.zktest.test2.F86_ZK_4111VM')">
+		<label multiline="true">
+			click these button, and wait 1 sec
+			observe the input tags attributes, you should see the inputAttr work as the description on the button
+			you can check data from VM by clicking "showVmMap" button
+			these actions should not change "id", "class" or other attributes that are added from mold.js
+			make sure all Input type component can work with inputAttr
+		</label>
+		<button id="btn1" label="add autocorrect=off" onClick="@command('addA')" w:onClick="showAttr()"/>
+		<button id="btn2" label="add spellcheck=true" onClick="@command('addS')" w:onClick="showAttr()"/>
+		<button id="add2" label="add A and B" onClick="@command('addAB')" w:onClick="showAttr()"/>
+		<button id="change" label="change to C and D" onClick="@command('changeCD')" w:onClick="showAttr()"/>
+		<button id="clear" label="clear" onClick="@command('clear')" w:onClick="showAttr()"/>
+		<button id="show" label="showVmMap" onClick="@command('show')"/>
+		<separator/>
+		<vlayout height="800px">
+			<div vflex="1">
+				bandbox:
+				<bandbox inputAttr="@load(vm.myAttributes)"></bandbox>
+				<label id="bandbox"></label>
+			</div>
+			<div vflex="1">
+				combobox:
+				<combobox inputAttr="@load(vm.myAttributes)"></combobox>
+				<label id="combobox"></label>
+			</div>
+			<div vflex="1">
+				textbox:
+				<textbox inputAttr="@load(vm.myAttributes)"></textbox>
+				<label id="textbox"></label>
+			</div>
+			<div vflex="1">
+				datebox:
+				<datebox inputAttr="@load(vm.myAttributes)"></datebox>
+				<label id="datebox"></label>
+			</div>
+			<div vflex="1">
+				timebox:
+				<timebox inputAttr="@load(vm.myAttributes)"></timebox>
+				<label id="timebox"></label>
+			</div>
+			<div vflex="1">
+				timepicker:
+				<timepicker inputAttr="@load(vm.myAttributes)"></timepicker>
+				<label id="timepicker"></label>
+			</div>
+			<div vflex="1">
+				decimalbox:
+				<decimalbox inputAttr="@load(vm.myAttributes)"></decimalbox>
+				<label id="decimalbox"></label>
+			</div>
+			<div vflex="1">
+				doublebox:
+				<doublebox inputAttr="@load(vm.myAttributes)"></doublebox>
+				<label id="doublebox"></label>
+			</div>
+			<div vflex="1">
+				doublespinner:
+				<doublespinner inputAttr="@load(vm.myAttributes)"></doublespinner>
+				<label id="doublespinner"></label>
+			</div>
+			<div vflex="1">
+				intbox:
+				<intbox inputAttr="@load(vm.myAttributes)"></intbox>
+				<label id="intbox"></label>
+			</div>
+			<div vflex="1">
+				longbox:
+				<longbox inputAttr="@load(vm.myAttributes)"></longbox>
+				<label id="longbox"></label>
+			</div>
+			<div vflex="1">
+				spinner:
+				<spinner inputAttr="@load(vm.myAttributes)"></spinner>
+				<label id="spinner"></label>
+			</div>
+		</vlayout>
+	</div>
+</zk>

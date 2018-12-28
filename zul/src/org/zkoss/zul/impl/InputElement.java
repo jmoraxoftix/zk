@@ -45,10 +45,7 @@ import org.zkoss.zk.ui.sys.ObjectPropertyAccess;
 import org.zkoss.zk.ui.sys.PropertyAccess;
 import org.zkoss.zk.ui.sys.StringPropertyAccess;
 import org.zkoss.zk.ui.util.Clients;
-import org.zkoss.zul.ClientConstraint;
-import org.zkoss.zul.Constraint;
-import org.zkoss.zul.CustomConstraint;
-import org.zkoss.zul.SimpleConstraint;
+import org.zkoss.zul.*;
 import org.zkoss.zul.ext.Constrainted;
 import org.zkoss.zul.mesg.MZul;
 
@@ -80,6 +77,7 @@ public abstract class InputElement extends XulElement implements Constrainted, R
 	private boolean _valided;
 	private boolean _inplace;
 	private String _placeholder;
+	private Map<String, String> _inputAttr = new HashMap<String, String>();
 
 	/**
 	 * Returns the placeholder text
@@ -768,6 +766,28 @@ public abstract class InputElement extends XulElement implements Constrainted, R
 			smartUpdate("errorboxIconSclass", getErrorboxIconSclass());
 		}
 	}
+	
+	/**
+	 * Returns the additional attributes which is set by setInputAttr(Map<String, String> inputAttr).
+	 * @return inputAttr a Map with attribute names as the keys.
+	 * @since 8.6.1
+	 */
+	public Map<String, String> getInputAttr() {
+		return _inputAttr;
+	}
+
+	/**
+	 * Sets some additional attributes to the input html tag in the component.
+	 * This will only reset the additional attributes that are set by this method.
+	 * @param inputAttr a Map with attribute names as the keys.
+	 * @since 8.6.1
+	 */
+	public void setInputAttr(Map<String, String> inputAttr) {
+		if (!Objects.equals(_inputAttr, inputAttr)) {
+			_inputAttr = inputAttr;
+			smartUpdate("inputAttr", _inputAttr);
+		}
+	}
 
 	//-- Component --//
 	/** Not childable. */
@@ -895,6 +915,8 @@ public abstract class InputElement extends XulElement implements Constrainted, R
 
 		if (_placeholder != null)
 			render(renderer, "placeholder", _placeholder);
+		if (!_inputAttr.isEmpty())
+			render(renderer, "inputAttr", _inputAttr);
 
 		int v;
 		if ((v = getMaxlength()) > 0)
